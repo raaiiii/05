@@ -16,20 +16,10 @@ body {
   min-height: 100vh;
   overflow-y: auto;
   color: #fff;
-}
-
-/* Fondo romántico */
-.fondo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background: linear-gradient(rgba(255,105,180,0.25), rgba(147,112,219,0.25)),
               url('https://i.pinimg.com/736x/98/7b/f2/987bf27dfcbf6e4a62c5259228243ce1.jpg') no-repeat center center;
   background-size: cover;
   filter: blur(1px) brightness(0.92);
-  z-index: -2;
 }
 
 /* Corazones flotando */
@@ -148,6 +138,7 @@ svg:hover {
   text-shadow:0 0 12px rgba(255,192,203,0.8);
 }
 
+/* Marca de agua */
 .marca-agua {
   position: fixed;
   bottom: 12px;
@@ -156,10 +147,46 @@ svg:hover {
   font-weight:bold;
   text-shadow:1px 1px 4px rgba(0,0,0,0.35);
 }
+
+/* Player de música personalizado */
+.player {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid #ff9dbb;
+  border-radius: 20px;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.player button {
+  background: #ff3366;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.player button:hover {
+  background: #ff99cc;
+}
+
+.player audio {
+  width: 250px;
+  border-radius: 10px;
+  outline: none;
+}
 </style>
 </head>
 <body>
-<div class="fondo"></div>
+
 <div id="base">
   <div id="contador">0%</div>
   <div id="corazon-container">
@@ -167,20 +194,34 @@ svg:hover {
       <path class="corazon-outline" d="M50 90 L20 60 A15 15 0 1 1 50 30 A15 15 0 1 1 80 60 Z"/>
       <path class="corazon-fill" d="M50 90 L20 60 A15 15 0 1 1 50 30 A15 15 0 1 1 80 60 Z"/>
     </svg>
+
     <div class="carta" id="carta">
       <h1>Para mi chiquita 💕</h1>
       <p><strong>De:</strong> Edu 💗</p>
-      <p>holi amor quiero decirte que me perdones de verdad lo siento... (todo tu texto original sigue aquí intacto)...</p>
+      <p>holi amor quiero decirte que me perdones de verdad lo siento, yo obviamente no es por calenturiento si? es por felicidad y porque tu de verdad me pones bien penoso, perdoname mi niña y no quiero que pienses que te utilizo porque yo no quiero que pienses eso yo siempre busco la manera para que te sientas feliz, amada, segura, bonita, siempre te digo lo mucho que te amo porque de verdad que m amor por ti nada ni nadie me hara no amarte porque para mi eres mas que perfecta mi bebita hermosa, porfavor te pido perdon, nunca lo debi decir, jamas por eso te pido perdon de verdad te rogo todo lo que quieras que porfavor me perdones porque yo no te utilizo para nada mis ojitos te ven con mucho amor, mi corazon se muere por ti todo de mi se muere por ti y porque te ama como no tienes idea, me haces sentir tan bien y lo siento si te fallo si soy mal novio si por mis estupideces te hago llorar de verdad que no quiero eso y mis intenciones contigo siempre seran amarte, cuidarte, hacerte sentir segura y demasiado bonita</p>
+   <p>quiero decirte que te amo como no te lo imaginas mi niña y que de verdad eres y seras la unica que le ruegue tanto, ame tanto, le haga tantas cartitas jejseje pq de verdad me nace hacerte cartitas para hacerte feliz, q te gusten mis cartitas y cada vez intento de agregarle mas cositas para que veas que no siempre sera igual o intento cambiarle algo mi niña pq de verdad quiero hacerte muchas cartitas y todo eso que a ti te gusta mi princesa. :3<p>
+      <p>siempre seras el amor de mi vida, la chica de mis sueños, mi bebita, mi niña, mi noviecita guapa, mi amorsito, mi esposa, mi princesa, mi reina, mi bebesita de ojos lindos, qro tratarte como niña chiquita amor darte mimos o que los dos nos demos mimos, de verdad que me gusta escucharte feliz me siento mal cuando estamos lejos ;c<p>
+         <p>de verdad quiero que seas tu tututu porque mi felicidad no la quiero con nadie mas solo contigo, quiero que todos mis hijos salgan con tu hermosa carita, ojitos y que los dos seamos los mejores papis de el mundo y yo intentare ser el mejor novio y papá de todos, quiero q tengamos algo lindo, eterno y con tranquilidad :b<p>
+           <p>Te dire una y mil veces que me encantas demasiado, me gustas, te amo, me haces tan feliz, me haces sentir con vida, me haces sentir tan bien, un sentimiento que de verdad que me encanta, me encanta que seas tu, me encanta poder ser tu novio, me encanta poder escucharte, me encanta poder decirte te amo y que tu me digas tambien que me amas, es un sentimiento que me hace feliz, perdoname si no te hago feliz mi niña yo trato de hacer lo mejor y perdon si fallo mi bebita perdon si mis palabras te hieren y nunca te e usado ni nunca te usare mi vida pq yo no quiero q seas para un ratito ni que pienses que estoy jugando contigo pq yo de verdad quiero todo contigo mi princesa nose si leas esto cuando despiertes, despues, ahorita o no lo leas, pero yo te amo y te digo todo de el corazonsito perdon por ser un mal novio<p>
       <p class="romantico">Perdon</p>
       <p class="romantico">I love you</p>
       <p>nunca me dejes de amar porfavor :(</p>
       <p><em>Edu 💘</em></p>
+
+      <!-- Player de música -->
+      <div class="player">
+        <button id="playBtn">▶️ Play</button>
+        <button id="pauseBtn">⏸️ Pause</button>
+        <audio id="musica" src="TU_CANCION.mp3"></audio>
+      </div>
     </div>
   </div>
 </div>
+
 <div class="marca-agua">De Edusito para Aylin 💝</div>
 
 <script>
+// Corazón y carta
 const fill = document.querySelector('.corazon-fill');
 const contador = document.getElementById('contador');
 const carta = document.getElementById('carta');
@@ -234,6 +275,14 @@ for(let i=0; i<25; i++){
   c.style.animation = `flotar ${duracion} linear ${retraso} infinite`;
   document.body.appendChild(c);
 }
+
+// Player de música
+const playBtn = document.getElementById('playBtn');
+const pauseBtn = document.getElementById('pauseBtn');
+const musica = document.getElementById('musica');
+
+playBtn.addEventListener('click', () => musica.play());
+pauseBtn.addEventListener('click', () => musica.pause());
 </script>
 </body>
 </html>
