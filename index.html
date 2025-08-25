@@ -14,12 +14,21 @@ body {
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  overflow-y: auto;
+  overflow-x: hidden;
   color: #fff;
-  background: linear-gradient(rgba(255,105,180,0.25), rgba(147,112,219,0.25)),
-    url('https://i.pinimg.com/736x/98/7b/f2/987bf27dfcbf6e4a62c5259228243ce1.jpg') no-repeat center center;
+  background: linear-gradient(to bottom, #ffb6c1, #ff69b4);
+}
+
+/* Fondo romántico */
+.fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://i.pinimg.com/736x/98/7b/f2/987bf27dfcbf6e4a62c5259228243ce1.jpg') no-repeat center center;
   background-size: cover;
-  filter: blur(1px) brightness(0.92);
+  z-index: -2;
 }
 
 /* Corazones flotando */
@@ -32,26 +41,63 @@ body {
   z-index: -1;
   opacity: 0.85;
 }
+
 @keyframes flotar {
   0% { transform: translateY(30px); opacity: 0; }
   15% { opacity: 1; }
   100% { transform: translateY(-120vh); opacity: 0; }
 }
 
-/* Base y carta */
-#base { display: flex; flex-direction: column; align-items: center; padding: 30px; width: 100%; max-width: 800px; }
-#contador { font-size: 28px; font-weight: bold; margin-bottom: 15px; text-align: center; color: #FFD6F6; text-shadow: 1px 1px 5px rgba(0,0,0,0.7); }
-#corazon-container { display: flex; flex-direction: column; align-items: center; transition: margin-top 1s ease; }
-svg { width: 180px; height: 180px; cursor: pointer; transition: transform 0.3s ease; animation: latido 1.5s infinite; }
-svg:hover { transform: scale(1.15) rotate(-3deg); filter: drop-shadow(0 0 12px #ff80bf); }
-@keyframes latido { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+#base {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  width: 100%;
+  max-width: 800px;
+}
+
+#contador {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #FFD6F6;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+}
+
+#corazon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: margin-top 1s ease;
+}
+
+svg {
+  width: 180px;
+  height: 180px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: latido 1.5s infinite;
+}
+
+svg:hover {
+  transform: scale(1.15) rotate(-3deg);
+  filter: drop-shadow(0 0 12px #ff80bf);
+}
+
+@keyframes latido {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
 .corazon-outline { fill: #ff9dbb; stroke: #ff2b2b; stroke-width: 2; }
 .corazon-fill { fill: #ff3366; clip-path: inset(100% 0 0 0); transition: clip-path 0.4s ease; }
 
 /* Carta */
 .carta {
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
   border: 2px solid rgba(255,182,193,0.5);
   border-radius: 22px;
   padding: 35px 30px;
@@ -62,45 +108,62 @@ svg:hover { transform: scale(1.15) rotate(-3deg); filter: drop-shadow(0 0 12px #
   transform: translateY(40px) scale(0.97);
   transition: opacity 1s ease, transform 1s ease;
   margin-top: 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.65);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.45);
 }
-@keyframes aparecer { 0% { transform: scale(0.85) rotate(-2deg); opacity:0; } 100% { transform: scale(1.02) rotate(0); opacity:1; } }
-.carta.visible { opacity: 1; transform: translateY(0) scale(1.02); box-shadow: 0 0 35px rgba(255,153,204,0.7); animation: aparecer 1s ease; }
-.carta h1 { font-family: 'Great Vibes', cursive; font-size: 45px; color: #ff99cc; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.65); }
-.carta p { font-size: 18px; line-height: 1.7em; margin:12px 0; text-shadow:1px 1px 4px rgba(0,0,0,0.7); color: #fff5f8; }
-.romantico { font-family: 'Great Vibes', cursive; font-size: 52px !important; color:#ffb6c1; margin:12px 0; text-shadow:0 0 12px rgba(255,192,203,0.8); }
 
-/* Marca de agua */
-.marca-agua { position: fixed; bottom: 12px; font-size: 15px; color: rgba(255,255,255,0.75); font-weight:bold; text-shadow:1px 1px 4px rgba(0,0,0,0.35); }
+@keyframes aparecer {
+  0% { transform: scale(0.85) rotate(-2deg); opacity:0; }
+  100% { transform: scale(1.02) rotate(0); opacity:1; }
+}
 
-/* Player mini fijo */
-.mini-player {
+.carta.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1.02);
+  box-shadow: 0 0 35px rgba(255,153,204,0.7);
+  animation: aparecer 1s ease;
+}
+
+.carta h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 45px;
+  color: #ff99cc;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.65);
+}
+
+.carta p {
+  font-size: 18px;
+  line-height: 1.7em;
+  margin:12px 0;
+  text-shadow:1px 1px 4px rgba(0,0,0,0.7);
+  color: #fff5f8;
+}
+
+.romantico {
+  font-family: 'Great Vibes', cursive;
+  font-size: 52px !important;
+  color:#ffb6c1;
+  margin:12px 0;
+  text-shadow:0 0 12px rgba(255,192,203,0.8);
+}
+
+.marca-agua {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 220px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  padding: 10px;
-  text-align: center;
-  color: #fff;
-  z-index: 9999;
-  backdrop-filter: blur(5px);
+  bottom: 12px;
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  font-weight:bold;
+  text-shadow:1px 1px 4px rgba(0,0,0,0.35);
 }
-.mini-player h4 { margin: 0 0 8px 0; font-size: 14px; font-family: 'Great Vibes', cursive; }
-.controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.controls button { background: #ff3366; border: none; border-radius: 50%; width: 30px; height: 30px; color: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
-.controls button:hover { transform: scale(1.2); }
-.progress-container { background: rgba(255,255,255,0.3); border-radius: 5px; height: 8px; cursor: pointer; position: relative; overflow: hidden; }
-.progress { background: linear-gradient(to right, #ff99cc, #ff3366); height: 100%; width: 0%; border-radius: 5px; position: relative; }
-.heart { position: absolute; width: 12px; height: 12px; background: red; clip-path: polygon(50% 0%, 61% 9%, 75% 9%, 84% 18%, 84% 32%, 75% 45%, 50% 70%, 25% 45%, 16% 32%, 16% 18%, 25% 9%, 39% 9%); animation: float 2s ease-in-out infinite; opacity: 0.7; }
-@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
 
+/* Música */
+audio {
+  display: none;
+}
 </style>
 </head>
 <body>
-
+<div class="fondo"></div>
 <div id="base">
   <div id="contador">0%</div>
   <div id="corazon-container">
@@ -111,37 +174,27 @@ svg:hover { transform: scale(1.15) rotate(-3deg); filter: drop-shadow(0 0 12px #
     <div class="carta" id="carta">
       <h1>Para mi chiquita 💕</h1>
       <p><strong>De:</strong> Edu 💗</p>
-      <p>holi amor quiero decirte que me perdones...</p>
-      <p class="romantico">Perdon</p>
+      <p>Holi amor, quiero decirte que me perdones de verdad. Lo siento mucho...</p>
+      <p class="romantico">Perdón</p>
       <p class="romantico">I love you</p>
-      <p>nunca me dejes de amar porfavor :(</p>
+      <p>Nunca me dejes de amar por favor :(</p>
       <p><em>Edu 💘</em></p>
     </div>
   </div>
 </div>
-
-<!-- Mini Player Fijo -->
-<div class="mini-player">
-  <h4>Infrunami - Steve Lacy</h4>
-  <div class="controls">
-    <button id="playPause">▶️</button>
-    <button id="loop">🔁</button>
-  </div>
-  <div class="progress-container">
-    <div class="progress" id="progress"></div>
-  </div>
-</div>
-
-<audio id="audio" src="https://github.com/raaiiii/05/raw/main/Infrunami.mp3"></audio>
-
 <div class="marca-agua">De Edusito para Aylin 💝</div>
 
+<!-- Música -->
+<audio autoplay loop>
+  <source src="https://raw.githubusercontent.com/raaiiii/05/main/Infrunami.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-// Corazón y carta
 const fill = document.querySelector('.corazon-fill');
 const contador = document.getElementById('contador');
 const carta = document.getElementById('carta');
 const corazonContainer = document.getElementById('corazon-container');
+
 let porcentaje = 0;
 let llenando = false;
 
@@ -178,6 +231,7 @@ const imagenes = [
   'https://www.pngmart.com/files/16/Hello-Kitty-Transparent-PNG.png',
   'https://www.pngall.com/wp-content/uploads/13/Hello-Kitty-Background-PNG.png'
 ];
+
 for(let i=0; i<25; i++){
   const c = document.createElement('img');
   c.className = 'corazon-fondo';
@@ -189,49 +243,6 @@ for(let i=0; i<25; i++){
   c.style.animation = `flotar ${duracion} linear ${retraso} infinite`;
   document.body.appendChild(c);
 }
-
-// Player mini
-const audio = document.getElementById('audio');
-const playPauseBtn = document.getElementById('playPause');
-const loopBtn = document.getElementById('loop');
-const progress = document.getElementById('progress');
-const progressContainer = document.querySelector('.progress-container');
-
-playPauseBtn.addEventListener('click', () => {
-  if(audio.paused){
-    audio.play();
-    playPauseBtn.textContent = '⏸️';
-  } else {
-    audio.pause();
-    playPauseBtn.textContent = '▶️';
-  }
-});
-
-loopBtn.addEventListener('click', () => {
-  audio.loop = !audio.loop;
-  loopBtn.style.background = audio.loop ? '#5cff5c' : '#ff3366';
-});
-
-audio.addEventListener('timeupdate', () => {
-  const percent = (audio.currentTime / audio.duration) * 100;
-  progress.style.width = percent + '%';
-});
-
-progressContainer.addEventListener('click', (e) => {
-  const width = progressContainer.clientWidth;
-  const clickX = e.offsetX;
-  audio.currentTime = (clickX / width) * audio.duration;
-});
-
-// Corazones en la barra
-setInterval(() => {
-  const heart = document.createElement('div');
-  heart.className = 'heart';
-  heart.style.left = Math.random() * progress.clientWidth + 'px';
-  progress.appendChild(heart);
-  setTimeout(() => heart.remove(), 2000);
-}, 500);
-
 </script>
 </body>
 </html>
